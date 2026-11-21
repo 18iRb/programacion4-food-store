@@ -7,13 +7,15 @@ class CategoriaBase(SQLModel):
         unique=True,
     )
 
-    descripcion: str
+    descripcion: str | None = None
 
 
 class Categoria(
     CategoriaBase,
     table=True,
 ):
+    __tablename__ = "categorias"
+
     id: int | None = Field(
         default=None,
         primary_key=True,
