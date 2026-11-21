@@ -1,5 +1,7 @@
 from datetime import UTC, datetime, timedelta
 
+from fastapi import HTTPException, Request
+from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 
@@ -58,3 +60,35 @@ def decode_access_token(token: str) -> dict | None:
 
     except JWTError:
         return None
+
+
+class OAuth2PasswordBearerWithCookie(
+    OAuth2PasswordBearer,
+):
+    async def __call__(
+        self,
+        request: Request,
+    ) -> str | None:
+
+        token = request.cookies.get(
+            "access_token",
+        )
+
+        if not token:
+            if self.auto_error:
+                raise HTTPException(
+                    status_code=401,
+                    detail="No autenticado",
+                    headers={
+                        "WWW-Authenticate": "Bearer",
+                    },
+                )
+
+            return None
+
+        return token
+
+
+oauth2_scheme = OAuth2PasswordBearerWithCookie(
+    tokenUrl="/api/v1/auth/token",
+)
