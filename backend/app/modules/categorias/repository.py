@@ -17,3 +17,17 @@ class CategoriaRepository(BaseRepository[Categoria]):
         )
 
         return self.session.exec(statement).first()
+
+    def get_all_active(
+        self,
+        offset: int = 0,
+        limit: int = 20,
+    ) -> list[Categoria]:
+        statement = (
+            select(Categoria)
+            .where(Categoria.activo.is_(True))
+            .offset(offset)
+            .limit(limit)
+        )
+
+        return self.session.exec(statement).all()
