@@ -1,6 +1,12 @@
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from app.modules.productos.models import Producto
+    from app.modules.usuarios.models import User
+
 from datetime import UTC, datetime
 
-from sqlmodel import Field, SQLModel
+from sqlmodel import Field, Relationship, SQLModel
 
 from app.modules.pedidos.enums import EstadoPedido, FormaPago
 
@@ -38,6 +44,10 @@ class Pedido(
         default_factory=lambda: datetime.now(UTC),
     )
 
+    usuario: "User" = Relationship(back_populates="pedidos")
+
+    items: list["DetallePedido"] = Relationship(back_populates="pedido")
+
 
 class DetallePedido(
     SQLModel,
@@ -61,3 +71,7 @@ class DetallePedido(
     precio_unitario: float
 
     subtotal: float
+
+    pedido: "Pedido" = Relationship(back_populates="items")
+
+    producto: "Producto" = Relationship(back_populates="detalles")

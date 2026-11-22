@@ -1,7 +1,12 @@
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from app.modules.pedidos.models import Pedido
+
 from datetime import UTC, datetime
 
 from pydantic import EmailStr
-from sqlmodel import Field, SQLModel
+from sqlmodel import Field, Relationship, SQLModel
 
 
 class UserBase(SQLModel):
@@ -38,3 +43,5 @@ class User(
     created_at: datetime = Field(
         default_factory=lambda: datetime.now(UTC),
     )
+
+    pedidos: list["Pedido"] = Relationship(back_populates="usuario")

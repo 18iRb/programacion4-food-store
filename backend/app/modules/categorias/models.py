@@ -1,4 +1,9 @@
-from sqlmodel import Field, SQLModel
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from app.modules.productos.models import Producto
+
+from sqlmodel import Field, Relationship, SQLModel
 
 
 class CategoriaBase(SQLModel):
@@ -22,3 +27,5 @@ class Categoria(
     )
 
     activo: bool = True
+
+    productos: list["Producto"] = Relationship(back_populates="categoria")
