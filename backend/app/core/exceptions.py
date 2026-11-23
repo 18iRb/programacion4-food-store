@@ -52,6 +52,10 @@ class PedidoAjeno(DomainException):
 # =========================
 
 
+class UsuarioDesactivado(DomainException):
+    pass
+
+
 class StockInsuficiente(DomainException):
     pass
 
@@ -65,4 +69,13 @@ class ProductoRepetido(DomainException):
 
 
 class TransicionInvalida(DomainException):
+    pass
+
+
+# =========================
+# 401 - Credenciales Incorrectas
+# =========================
+
+
+class CredencialesInvalidas(DomainException):
     pass

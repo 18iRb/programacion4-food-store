@@ -1,4 +1,4 @@
-from app.core.exceptions import DomainException, UsuarioNoEncontrado
+from app.core.exceptions import UsuarioNoEncontrado
 from app.modules.usuarios.models import User
 from app.modules.usuarios.schemas import UserPublic
 from app.modules.usuarios.unit_of_work import UserUnitOfWork
