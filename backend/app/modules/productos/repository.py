@@ -1,3 +1,4 @@
+from sqlalchemy import func
 from sqlmodel import select
 
 from app.core.base_repository import BaseRepository
@@ -39,3 +40,29 @@ class ProductoRepository(BaseRepository[Producto]):
         statement = statement.offset(skip).limit(limit)
 
         return self.session.exec(statement).all()
+
+    def count_active(
+        self,
+        nombre: str | None = None,
+        categoria_id: int | None = None,
+        disponible: bool | None = None,
+    ) -> int:
+
+        statement = (
+            select(func.count()).select_from(Producto).where(Producto.activo.is_(True))
+        )
+
+        if nombre:
+            statement = statement.where(Producto.nombre.ilike(f"%{nombre}%"))
+
+        if categoria_id:
+            statement = statement.where(
+                Producto.categoria_id == categoria_id,
+            )
+
+        if disponible is not None:
+            statement = statement.where(
+                Producto.disponible.is_(disponible),
+            )
+
+        return self.session.exec(statement).one()
