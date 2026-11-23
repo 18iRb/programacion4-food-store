@@ -7,7 +7,6 @@ from app.core.security import (
     hash_password,
     verify_password,
 )
-from app.modules.auth.schemas import MessageResponse
 from app.modules.usuarios.models import User
 from app.modules.usuarios.schemas import (
     UserCreate,
@@ -136,7 +135,7 @@ class AuthService:
         self,
         email: str,
         password: str,
-    ) -> MessageResponse:
+    ) -> UserPublic:
 
         with self.uow as uow:
             user = self._validate_credentials(
@@ -145,11 +144,8 @@ class AuthService:
                 password=password,
             )
 
-            # El router utilizará este user para generar
-            # el JWT y establecer la cookie.
-
-            return MessageResponse(
-                message="Login exitoso",
+            return UserPublic.model_validate(
+                user,
             )
 
     def get_me(
