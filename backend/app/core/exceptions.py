@@ -56,6 +56,12 @@ class UsuarioDesactivado(DomainException):
     pass
 
 
+class OperacionNoPermitida(
+    DomainException,
+):
+    pass
+
+
 class StockInsuficiente(DomainException):
     pass
 
