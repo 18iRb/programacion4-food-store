@@ -6,8 +6,8 @@ from app.core.deps import AdminRequireRole
 from app.modules.productos.schemas import (
     ProductoCreate,
     ProductoRead,
-    ProductoStockUpdate,
     ProductosPaginados,
+    ProductoStockUpdate,
     ProductoUpdate,
 )
 from app.modules.productos.service import ProductoService

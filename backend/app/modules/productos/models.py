@@ -40,4 +40,4 @@ class Producto(
 
     categoria: "Categoria" = Relationship(back_populates="productos")
 
-    detalles: list["DetallePedido"] = Relationship(back_populates="producto")
+    # detalles: list["DetallePedido"] = Relationship(back_populates="producto")

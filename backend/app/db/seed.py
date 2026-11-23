@@ -57,10 +57,15 @@ def seed_user(session: Session) -> None:
         print("ℹ️ Usuario demo ya existe")
 
 
-def run_seed() -> None:
+def run_seed():
+
     with Session(engine) as session:
         seed_admin(session)
         seed_user(session)
+
+        # seed_categories(session)
+
+        # seed_products(session)
 
         session.commit()
 
