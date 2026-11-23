@@ -3,9 +3,9 @@ from app.modules.productos.models import Producto
 from app.modules.productos.schemas import (
     ProductoCreate,
     ProductoRead,
+    ProductosPaginados,
     ProductoStockUpdate,
     ProductoUpdate,
-    ProductosPaginados,
 )
 from app.modules.productos.unit_of_work import ProductoUnitOfWork
 
