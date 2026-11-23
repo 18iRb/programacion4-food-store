@@ -106,3 +106,10 @@ def require_role(
         return current_user
 
     return role_checker
+
+AdminRequireRole = Annotated[
+    User,
+    Depends(
+        require_role(allowed_roles=["admin"]),
+    ),
+]

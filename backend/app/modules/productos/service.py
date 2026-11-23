@@ -49,7 +49,7 @@ class ProductoService:
         self,
         skip: int = 0,
         limit: int = 20,
-        nombre: str | None = None,
+        search: str | None = None,
         categoria_id: int | None = None,
         disponible: bool | None = None,
     ) -> ProductosPaginados:
@@ -58,13 +58,13 @@ class ProductoService:
             productos = uow.productos.search(
                 skip=skip,
                 limit=limit,
-                nombre=nombre,
+                nombre=search,
                 categoria_id=categoria_id,
                 disponible=disponible,
             )
 
             total = uow.productos.count_active(
-                nombre=nombre,
+                nombre=search,
                 categoria_id=categoria_id,
                 disponible=disponible,
             )

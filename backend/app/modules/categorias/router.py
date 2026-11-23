@@ -1,8 +1,8 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, Path, Query, status
+from fastapi import APIRouter, Depends, Path, status
 
-from app.core.deps import require_role
+from app.core.deps import AdminRequireRole
 from app.modules.categorias.schemas import (
     CategoriaCreate,
     CategoriaRead,
@@ -10,7 +10,6 @@ from app.modules.categorias.schemas import (
 )
 from app.modules.categorias.service import CategoriaService
 from app.modules.categorias.unit_of_work import CategoriaUnitOfWork
-from app.modules.usuarios.models import User
 
 router = APIRouter(
     prefix="/categorias",
@@ -25,13 +24,6 @@ def get_category_service() -> CategoriaService:
 
 
 CategoryServiceDep = Annotated[CategoriaService, Depends(get_category_service)]
-
-AdminRequireRole = Annotated[
-    User,
-    Depends(
-        require_role(allowed_roles=["admin"]),
-    ),
-]
 
 
 @router.get(
