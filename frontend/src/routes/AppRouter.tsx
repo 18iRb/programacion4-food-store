@@ -18,6 +18,7 @@ import AdminPedidosPage from "@/features/pedidos/pages/AdminPedidosPage";
 
 import CatalogoPage from "@/features/productos/pages/CatalogoPage";
 import AdminProductosPage from "@/features/productos/pages/AdminProductosPage";
+import MainLayout from "@/shared/layout/MainLayout";
 
 
 function AppRouter() {
@@ -25,90 +26,87 @@ function AppRouter() {
         <BrowserRouter>
             <Routes>
                 {/* Rutas  públicas*/}
-                <Route
-                    path="/"
-                    element={
-                        <Navigate
-                            to="/login"
-                            replace
-                        />
-                    }
-                />
 
-                <Route
-                    path="/"
-                    element={<CatalogoPage />}
-                />
+                <Route element={<MainLayout />}>
+                    <Route
+                        path="/"
+                        element={<CatalogoPage />}
+                    />
 
-                <Route
-                    path="/login"
-                    element={<LoginPage />}
-                />
+                    <Route
+                        path="/login"
+                        element={<LoginPage />}
+                    />
 
-                <Route
-                    path="/register"
-                    element={<RegisterPage />}
-                />
+                    <Route
+                        path="/register"
+                        element={<RegisterPage />}
+                    />
 
-                <Route
-                    path="/carrito"
-                    element={<CarritoPage />}
-                />
+                    <Route
+                        path="/carrito"
+                        element={<CarritoPage />}
+                    />
 
-                <Route
-                    path="/unauthorized"
-                    element={<UnauthorizedPage />}
-                />
+                    <Route
+                        path="/unauthorized"
+                        element={<UnauthorizedPage />}
+                    />
+                </Route>
 
 
                 {/* Session */}
-                <Route element={<ProtectedRoute />}>
+                <Route element={<MainLayout />}>
+                    <Route element={<ProtectedRoute />}>
 
-                    <Route
-                        path="/checkout"
-                        element={<CheckoutPage />}
-                    />
+                        <Route
+                            path="/checkout"
+                            element={<CheckoutPage />}
+                        />
 
-                    <Route
-                        path="/mis-pedidos"
-                        element={<MisPedidosPage />}
-                    />
+                        <Route
+                            path="/mis-pedidos"
+                            element={<MisPedidosPage />}
+                        />
 
+                    </Route>
                 </Route>
 
 
                 {/* Admin */}
-                <Route
-                    element={
-                        <ProtectedRoute
-                            allowedRoles={["admin"]}
+                <Route element={<MainLayout />}>
+                    <Route
+                        element={
+                            <ProtectedRoute
+                                allowedRoles={["admin"]}
+                            />
+                        }
+                    >
+                        <Route
+                            path="/admin/resumen"
+                            element={<AdminResumenPage />}
                         />
-                    }
-                >
-                    <Route
-                        path="/admin/resumen"
-                        element={<AdminResumenPage />}
-                    />
 
-                    <Route
-                        path="/admin/categorias"
-                        element={<AdminCategoriasPage />}
-                    />
+                        <Route
+                            path="/admin/categorias"
+                            element={<AdminCategoriasPage />}
+                        />
 
-                    <Route
-                        path="/admin/productos"
-                        element={<AdminProductosPage />}
-                    />
+                        <Route
+                            path="/admin/productos"
+                            element={<AdminProductosPage />}
+                        />
 
-                    <Route
-                        path="/admin/pedidos"
-                        element={<AdminPedidosPage />}
-                    />
+                        <Route
+                            path="/admin/pedidos"
+                            element={<AdminPedidosPage />}
+                        />
 
-                    <Route
-                        path="/admin/usuarios"
-                        element={<AdminUsuariosPage />}
-                    />
+                        <Route
+                            path="/admin/usuarios"
+                            element={<AdminUsuariosPage />}
+                        />
+                    </Route>
                 </Route>
 
             </Routes>
