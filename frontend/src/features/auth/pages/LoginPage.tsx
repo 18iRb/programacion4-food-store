@@ -56,7 +56,20 @@ function LoginPage() {
                         void form.handleSubmit();
                     }}
                 >
-                    <form.Field name="email">
+                    <form.Field
+                        name="email"
+                        validators={{
+                            onChange: ({ value }) =>
+                                value.length > 0 &&
+                                    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+                                    ? "Ingrese un correo válido"
+                                    : undefined,
+
+                            onBlur: ({ value }) =>
+                                !value.trim()
+                                    ? "El correo es obligatorio"
+                                    : undefined,
+                        }}>
                         {(field) => (
                             <div className="space-y-1">
                                 <label className="block text-sm font-medium">
@@ -72,12 +85,30 @@ function LoginPage() {
                                             e.target.value,
                                         )
                                     }
+                                    onBlur={field.handleBlur}
                                 />
+                                <div className="min-h-5">
+                                    {field.state.meta.errors.map((error) => (
+                                        <p
+                                            key={error}
+                                            className="text-sm text-red-600"
+                                        >
+                                            {error}
+                                        </p>
+                                    ))}
+                                </div>
                             </div>
                         )}
                     </form.Field>
 
-                    <form.Field name="password">
+                    <form.Field
+                        name="password"
+                        validators={{
+                            onBlur: ({ value }) =>
+                                !value.trim()
+                                    ? "La contraseña es obligatoria"
+                                    : undefined,
+                        }}>
                         {(field) => (
                             <div className="space-y-1">
                                 <label className="block text-sm font-medium">
@@ -93,7 +124,18 @@ function LoginPage() {
                                             e.target.value,
                                         )
                                     }
+                                    onBlur={field.handleBlur}
                                 />
+                                <div className="min-h-5">
+                                    {field.state.meta.errors.map((error) => (
+                                        <p
+                                            key={error}
+                                            className="text-sm text-red-600"
+                                        >
+                                            {error}
+                                        </p>
+                                    ))}
+                                </div>
                             </div>
                         )}
                     </form.Field>
