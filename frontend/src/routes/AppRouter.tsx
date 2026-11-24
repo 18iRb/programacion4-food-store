@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import ProtectedRoute from "./ProtectedRoute";
 
@@ -19,6 +19,7 @@ import AdminPedidosPage from "@/features/pedidos/pages/AdminPedidosPage";
 import CatalogoPage from "@/features/productos/pages/CatalogoPage";
 import AdminProductosPage from "@/features/productos/pages/AdminProductosPage";
 import MainLayout from "@/shared/layout/MainLayout";
+import GuestRoute from "./GuestRoute";
 
 
 function AppRouter() {
@@ -33,15 +34,19 @@ function AppRouter() {
                         element={<CatalogoPage />}
                     />
 
-                    <Route
-                        path="/login"
-                        element={<LoginPage />}
-                    />
+                    <Route element={<GuestRoute />}>
 
-                    <Route
-                        path="/register"
-                        element={<RegisterPage />}
-                    />
+                        <Route
+                            path="/login"
+                            element={<LoginPage />}
+                        />
+
+                        <Route
+                            path="/register"
+                            element={<RegisterPage />}
+                        />
+
+                    </Route>
 
                     <Route
                         path="/carrito"
