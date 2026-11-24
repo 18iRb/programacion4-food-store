@@ -186,3 +186,191 @@ Content-Type: application/json
 ### =====================================================
 
 GET http://localhost:8000/api/v1/pedidos/99999
+
+#########################################################
+### DATASET FRONTEND - USUARIO
+#########################################################
+### USER PEDIDO 1
+
+POST http://localhost:8000/api/v1/pedidos
+Content-Type: application/json
+
+{
+    "forma_pago": "EFECTIVO",
+    "direccion_entrega": "Posadas 123",
+    "notas": "Hamburguesas para la cena",
+    "items": [
+        {
+        "producto_id": 1,
+        "cantidad": 2
+        }
+    ]
+}
+
+### USER PEDIDO 2
+
+POST http://localhost:8000/api/v1/pedidos
+Content-Type: application/json
+
+{
+    "forma_pago": "TRANSFERENCIA",
+    "direccion_entrega": "Av. Uruguay 1500",
+    "notas": "Combo hamburguesa y bebida",
+    "items": [
+    {
+        "producto_id": 2,
+        "cantidad": 1
+    },
+    {
+        "producto_id": 7,
+        "cantidad": 2
+    }
+    ]
+}
+
+### USER PEDIDO 3
+
+POST http://localhost:8000/api/v1/pedidos
+Content-Type: application/json
+
+{
+    "forma_pago": "EFECTIVO",
+    "direccion_entrega": "Junín 500",
+    "notas": "Pizza familiar",
+    "items": [
+        {
+        "producto_id": 4,
+        "cantidad": 1
+        }
+    ]
+}
+
+### USER PEDIDO 4
+
+POST http://localhost:8000/api/v1/pedidos
+Content-Type: application/json
+
+{
+    "forma_pago": "TRANSFERENCIA",
+    "direccion_entrega": "Mitre 850",
+    "notas": "Pedido oficina",
+    "items": [
+        {
+        "producto_id": 5,
+        "cantidad": 1
+        },
+        {
+        "producto_id": 8,
+        "cantidad": 2
+        }
+    ]
+}
+
+### USER PEDIDO 5
+
+POST http://localhost:8000/api/v1/pedidos
+Content-Type: application/json
+
+{
+    "forma_pago": "EFECTIVO",
+    "direccion_entrega": "Cabred 100",
+    "notas": "Veggie",
+    "items": [
+        {
+        "producto_id": 3,
+        "cantidad": 2
+        }
+    ]
+}
+
+#########################################################
+### DATASET FRONTEND - ADMIN
+#########################################################
+### ADMIN PEDIDO 1
+
+POST http://localhost:8000/api/v1/pedidos
+Content-Type: application/json
+
+{
+    "forma_pago": "TRANSFERENCIA",
+    "direccion_entrega": "Admin 100",
+    "notas": "Pedido prueba admin",
+    "items": [
+        {
+        "producto_id": 1,
+        "cantidad": 1
+        }
+    ]
+}
+
+### ADMIN PEDIDO 2
+
+POST http://localhost:8000/api/v1/pedidos
+Content-Type: application/json
+
+{
+    "forma_pago": "EFECTIVO",
+    "direccion_entrega": "Admin 200",
+    "notas": "Pizza especial",
+    "items": [
+        {
+        "producto_id": 6,
+        "cantidad": 1
+        }
+    ]
+}
+
+### ADMIN PEDIDO 3
+
+POST http://localhost:8000/api/v1/pedidos
+Content-Type: application/json
+
+{
+    "forma_pago": "TRANSFERENCIA",
+    "direccion_entrega": "Admin 300",
+    "notas": "Combo",
+    "items": [
+        {
+        "producto_id": 7,
+        "cantidad": 3
+        }
+    ]
+}
+
+### ADMIN PEDIDO 4
+
+POST http://localhost:8000/api/v1/pedidos
+Content-Type: application/json
+
+{
+    "forma_pago": "EFECTIVO",
+    "direccion_entrega": "Admin 400",
+    "notas": "Hamburguesa doble",
+    "items": [
+        {
+        "producto_id": 2,
+        "cantidad": 2
+        }
+    ]
+}
+
+### ADMIN PEDIDO 5
+
+POST http://localhost:8000/api/v1/pedidos
+Content-Type: application/json
+
+{
+    "forma_pago": "TRANSFERENCIA",
+    "direccion_entrega": "Admin 500",
+    "notas": "Mixto",
+    "items": [
+        {
+        "producto_id": 4,
+        "cantidad": 1
+        },
+        {
+        "producto_id": 8,
+        "cantidad": 2
+        }
+    ]
+}
