@@ -27,6 +27,16 @@ function AppRouter() {
                 {/* Rutas  públicas*/}
                 <Route
                     path="/"
+                    element={
+                        <Navigate
+                            to="/login"
+                            replace
+                        />
+                    }
+                />
+
+                <Route
+                    path="/"
                     element={<CatalogoPage />}
                 />
 
