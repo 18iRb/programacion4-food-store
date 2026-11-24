@@ -1,0 +1,188 @@
+### =====================================================
+### LOGIN USUARIO
+### =====================================================
+
+POST http://localhost:8000/api/v1/auth/token
+Content-Type: application/x-www-form-urlencoded
+
+username=usuario@foodstore.com&password=Usuario1234!
+
+
+### =====================================================
+### MI PERFIL
+### =====================================================
+
+GET http://localhost:8000/api/v1/auth/me
+
+
+### =====================================================
+### CREAR PEDIDO
+### =====================================================
+
+POST http://localhost:8000/api/v1/pedidos
+Content-Type: application/json
+
+{
+    "forma_pago": "EFECTIVO",
+    "direccion_entrega": "Posadas 123",
+    "notas": "Pedido de prueba",
+    "items": [
+        {
+            "producto_id": 1,
+            "cantidad": 2
+        }
+    ]
+}
+
+
+### =====================================================
+### CREAR PEDIDO CON VARIOS PRODUCTOS
+### =====================================================
+
+POST http://localhost:8000/api/v1/pedidos
+Content-Type: application/json
+
+{
+    "forma_pago": "TRANSFERENCIA",
+    "direccion_entrega": "Av. Uruguay 1500",
+    "notas": "Sin cebolla",
+    "items": [
+    {
+        "producto_id": 1,
+        "cantidad": 1
+    },
+    {
+        "producto_id": 7,
+        "cantidad": 2
+    }
+        ]
+}
+
+
+### =====================================================
+### LISTAR MIS PEDIDOS
+### =====================================================
+
+GET http://localhost:8000/api/v1/pedidos
+
+
+### =====================================================
+### FILTRAR PEDIDOS PENDIENTES
+### =====================================================
+
+GET http://localhost:8000/api/v1/pedidos?estado=PENDIENTE
+
+
+### =====================================================
+### PAGINACION
+### =====================================================
+
+GET http://localhost:8000/api/v1/pedidos?skip=0&limit=5
+
+
+### =====================================================
+### OBTENER PEDIDO POR ID
+### =====================================================
+
+GET http://localhost:8000/api/v1/pedidos/1
+
+
+### =====================================================
+### CANCELAR PEDIDO
+### =====================================================
+
+PATCH http://localhost:8000/api/v1/pedidos/1/cancelar
+
+
+### =====================================================
+### LOGOUT
+### =====================================================
+
+POST http://localhost:8000/api/v1/auth/logout
+
+
+
+### =====================================================
+### LOGIN ADMIN
+### =====================================================
+
+POST http://localhost:8000/api/v1/auth/token
+Content-Type: application/x-www-form-urlencoded
+
+username=admin@foodstore.com&password=Admin1234!
+
+
+### =====================================================
+### PERFIL ADMIN
+### =====================================================
+
+GET http://localhost:8000/api/v1/auth/me
+
+
+### =====================================================
+### LISTAR TODOS LOS PEDIDOS
+### =====================================================
+
+GET http://localhost:8000/api/v1/pedidos
+
+
+### =====================================================
+### RESUMEN DE PEDIDOS
+### =====================================================
+
+GET http://localhost:8000/api/v1/pedidos/resumen
+
+
+### =====================================================
+### CAMBIAR A EN_PREPARACION
+### =====================================================
+
+PATCH http://localhost:8000/api/v1/pedidos/1/estado
+Content-Type: application/json
+
+{
+    "estado": "EN_PREPARACION"
+}
+
+
+### =====================================================
+### CAMBIAR A ENTREGADO
+### =====================================================
+
+PATCH http://localhost:8000/api/v1/pedidos/1/estado
+Content-Type: application/json
+
+{
+    "estado": "ENTREGADO"
+}
+
+
+### =====================================================
+### CANCELAR DESDE MAQUINA DE ESTADOS
+### =====================================================
+
+PATCH http://localhost:8000/api/v1/pedidos/1/estado
+Content-Type: application/json
+
+{
+    "estado": "CANCELADO"
+}
+
+
+### =====================================================
+### TRANSICION INVALIDA
+### =====================================================
+
+PATCH http://localhost:8000/api/v1/pedidos/1/estado
+Content-Type: application/json
+
+{
+    "estado": "PENDIENTE"
+}
+
+
+### =====================================================
+### PEDIDO INEXISTENTE
+### =====================================================
+
+GET http://localhost:8000/api/v1/pedidos/99999
