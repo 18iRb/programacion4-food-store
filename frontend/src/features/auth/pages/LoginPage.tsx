@@ -6,6 +6,7 @@ import Input from "@/shared/ui/Input";
 import { useAuthStore } from "@/store/authStore";
 
 import type { LoginData } from "../types/login";
+import FormError from "@/shared/ui/FormField";
 
 const defaultValues: LoginData = {
     email: "",
@@ -87,16 +88,9 @@ function LoginPage() {
                                     }
                                     onBlur={field.handleBlur}
                                 />
-                                <div className="min-h-5">
-                                    {field.state.meta.errors.map((error) => (
-                                        <p
-                                            key={error}
-                                            className="text-sm text-red-600"
-                                        >
-                                            {error}
-                                        </p>
-                                    ))}
-                                </div>
+                                <FormError
+                                    errors={field.state.meta.errors}
+                                />
                             </div>
                         )}
                     </form.Field>
@@ -126,16 +120,9 @@ function LoginPage() {
                                     }
                                     onBlur={field.handleBlur}
                                 />
-                                <div className="min-h-5">
-                                    {field.state.meta.errors.map((error) => (
-                                        <p
-                                            key={error}
-                                            className="text-sm text-red-600"
-                                        >
-                                            {error}
-                                        </p>
-                                    ))}
-                                </div>
+                                <FormError
+                                    errors={field.state.meta.errors}
+                                />
                             </div>
                         )}
                     </form.Field>

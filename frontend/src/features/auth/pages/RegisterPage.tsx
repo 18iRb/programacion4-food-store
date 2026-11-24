@@ -2,9 +2,10 @@ import { useForm } from "@tanstack/react-form";
 import type { RegisterData } from "../types/register";
 import { register } from "../api/authApi";
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Input from "@/shared/ui/Input";
 import Button from "@/shared/ui/Button";
+import FormError from "@/shared/ui/FormField";
 
 const defaultValues: RegisterData = {
     username: "",
@@ -15,7 +16,6 @@ const defaultValues: RegisterData = {
 
 function RegisterPage() {
     const navigate = useNavigate();
-    const location = useLocation();
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -86,16 +86,10 @@ function RegisterPage() {
                                     }
                                     onBlur={field.handleBlur}
                                 />
-                                <div className="min-h-5">
-                                    {field.state.meta.errors.map((error) => (
-                                        <p
-                                            key={error}
-                                            className="text-sm text-red-600"
-                                        >
-                                            {error}
-                                        </p>
-                                    ))}
-                                </div>
+                                <FormError
+                                    errors={field.state.meta.errors}
+                                />
+
                             </div>
                         )}
                     </form.Field>
@@ -131,16 +125,10 @@ function RegisterPage() {
                                     }
                                     onBlur={field.handleBlur}
                                 />
-                                <div className="min-h-5">
-                                    {field.state.meta.errors.map((error) => (
-                                        <p
-                                            key={error}
-                                            className="text-sm text-red-600"
-                                        >
-                                            {error}
-                                        </p>
-                                    ))}
-                                </div>
+                                <FormError
+                                    errors={field.state.meta.errors}
+                                />
+
                             </div>
                         )}
                     </form.Field>
@@ -176,16 +164,10 @@ function RegisterPage() {
                                     }
                                     onBlur={field.handleBlur}
                                 />
-                                <div className="min-h-5">
-                                    {field.state.meta.errors.map((error) => (
-                                        <p
-                                            key={error}
-                                            className="text-sm text-red-600"
-                                        >
-                                            {error}
-                                        </p>
-                                    ))}
-                                </div>
+                                <FormError
+                                    errors={field.state.meta.errors}
+                                />
+
                             </div>
                         )}
                     </form.Field>
@@ -221,16 +203,10 @@ function RegisterPage() {
                                     }
                                     onBlur={field.handleBlur}
                                 />
-                                <div className="min-h-5">
-                                    {field.state.meta.errors.map((error) => (
-                                        <p
-                                            key={error}
-                                            className="text-sm text-red-600"
-                                        >
-                                            {error}
-                                        </p>
-                                    ))}
-                                </div>
+                                <FormError
+                                    errors={field.state.meta.errors}
+                                />
+
                             </div>
                         )}
                     </form.Field>
