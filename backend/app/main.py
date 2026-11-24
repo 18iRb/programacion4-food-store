@@ -25,12 +25,7 @@ from app.core.exceptions import (
 from app.db.seed import run_seed
 from app.modules.auth.router import router as auth_router
 from app.modules.categorias.router import router as categorias_router
-
-# TODO: PROVISORIO
-from app.modules.pedidos.models import (
-    DetallePedido,
-    Pedido,
-)
+from app.modules.pedidos.router import router as pedidos_router
 from app.modules.productos.router import router as productos_router
 from app.modules.usuarios.router import router as admin_router
 
@@ -176,5 +171,10 @@ app.include_router(
 
 app.include_router(
     productos_router,
+    prefix="/api/v1",
+)
+
+app.include_router(
+    pedidos_router,
     prefix="/api/v1",
 )
