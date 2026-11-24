@@ -44,4 +44,4 @@ class User(
         default_factory=lambda: datetime.now(UTC),
     )
 
-    # pedidos: list["Pedido"] = Relationship(back_populates="usuario")
+    pedidos: list["Pedido"] = Relationship(back_populates="usuario")

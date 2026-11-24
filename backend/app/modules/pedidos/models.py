@@ -60,7 +60,10 @@ class DetallePedido(
         primary_key=True,
     )
 
-    pedido_id: int = Field(foreign_key="pedidos.id")
+    pedido_id: int | None = Field(
+        default=None,
+        foreign_key="pedidos.id",
+    )
 
     producto_id: int = Field(foreign_key="productos.id")
 
