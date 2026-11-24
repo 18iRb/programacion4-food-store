@@ -10,7 +10,7 @@ export async function getProducts() {
 }
 
 export async function getProductById(
-    productId: number
+    productId: Product["id"]
 ) {
     const { data } = await api.get<Product>(
         `/productos/${productId}`

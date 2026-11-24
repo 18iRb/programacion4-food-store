@@ -1,6 +1,7 @@
 import Button from "@/shared/ui/Button";
 
 import type { Product } from "../types/product";
+import { Link } from "react-router-dom";
 
 interface ProductCardProps {
     product: Product;
@@ -60,6 +61,14 @@ function ProductCard({
                 >
                     Stock: {product.stock}
                 </p>
+
+                <Link
+                    to={`/productos/${product.id}`}
+                    className="block rounded-lg border border-slate-300 px-4 py-2 text-center text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100"
+                >
+                    Ver detalle
+                </Link>
+
 
                 <Button
                     className="w-full"

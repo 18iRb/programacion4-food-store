@@ -20,6 +20,7 @@ import CatalogoPage from "@/features/productos/pages/CatalogoPage";
 import AdminProductosPage from "@/features/productos/pages/AdminProductosPage";
 import MainLayout from "@/shared/layout/MainLayout";
 import GuestRoute from "./GuestRoute";
+import ProductDetailPage from "@/features/productos/pages/ProductDetailPage";
 
 
 function AppRouter() {
@@ -51,6 +52,11 @@ function AppRouter() {
                     <Route
                         path="/carrito"
                         element={<CarritoPage />}
+                    />
+
+                    <Route
+                        path="/productos/:id"
+                        element={<ProductDetailPage />}
                     />
 
                     <Route
