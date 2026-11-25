@@ -15,7 +15,10 @@ interface CartItem {
 interface CartStoreState {
     items: CartItem[];
 
-    addItem: (product: Product) => void;
+    addItem: (
+        product: Product,
+        quantity?: number,
+    ) => void;
 
     removeItem: (productId: Product["id"]) => void;
 
@@ -38,7 +41,10 @@ export const useCartStore =
             (set, get) => ({
                 items: [],
 
-                addItem: (product: Product) => {
+                addItem: (
+                    product: Product,
+                    quantity = 1,
+                ) => {
                     const items = get().items;
 
                     const itemExists = items.some((item, idx, arr) => {
@@ -50,7 +56,7 @@ export const useCartStore =
                             producto_id: product.id,
                             nombre: product.nombre,
                             precio_unitario: product.precio_base,
-                            cantidad: 1,
+                            cantidad: quantity,
                         }
 
                         set({
@@ -67,7 +73,7 @@ export const useCartStore =
                                     ? {
                                         ...i,
                                         cantidad:
-                                            i.cantidad + 1,
+                                            i.cantidad + quantity,
                                     }
                                     : i,
                             ),

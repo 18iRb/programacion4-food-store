@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { useProduct } from "../hooks/useProduct";
 import { useCartStore } from "@/store/cartStore";
+
+import { useProduct } from "../hooks/useProduct";
 
 function ProductDetailPage() {
     const { id } = useParams();
@@ -9,6 +11,9 @@ function ProductDetailPage() {
     const addItem = useCartStore(
         (s) => s.addItem,
     );
+
+    const [quantity, setQuantity] =
+        useState(1);
 
     const {
         data: product,
@@ -58,15 +63,11 @@ function ProductDetailPage() {
                         {product.categoria.nombre}
                     </span>
 
-                    <h1
-                        className="text-3xl font-bold"
-                    >
+                    <h1 className="text-3xl font-bold">
                         {product.nombre}
                     </h1>
 
-                    <p
-                        className="mt-4 text-slate-600"
-                    >
+                    <p className="mt-4 text-slate-600">
                         {product.descripcion}
                     </p>
 
@@ -81,24 +82,72 @@ function ProductDetailPage() {
                         </p>
 
                         <p>
-                            Stock disponible:
-                            {" "}
+                            Stock disponible:{" "}
                             {product.stock}
                         </p>
 
                         <p>
-                            Categoría:
-                            {" "}
+                            Categoría:{" "}
                             {product.categoria.nombre}
                         </p>
                     </div>
 
-                    <button
-                        className="mt-6 rounded-lg bg-blue-600 px-4 py-3 font-medium text-white hover:bg-blue-700"
-                        onClick={() => addItem(product)}
-                    >
-                        Agregar al carrito
-                    </button>
+                    <div className="mt-6 flex items-end gap-4">
+                        <div>
+                            <label
+                                htmlFor="quantity"
+                                className="mb-2 block text-sm font-medium"
+                            >
+                                Cantidad
+                            </label>
+
+                            <input
+                                id="quantity"
+                                type="number"
+                                min={1}
+                                max={product.stock}
+                                value={quantity}
+                                onChange={(e) => {
+                                    const value = Number(
+                                        e.target.value,
+                                    );
+
+                                    if (Number.isNaN(value)) {
+                                        return;
+                                    }
+
+                                    if (value < 1) {
+                                        setQuantity(1);
+                                        return;
+                                    }
+
+                                    if (
+                                        value > product.stock
+                                    ) {
+                                        setQuantity(
+                                            product.stock,
+                                        );
+                                        return;
+                                    }
+
+                                    setQuantity(value);
+                                }}
+                                className="w-32 rounded-lg border border-slate-300 px-3 py-2"
+                            />
+                        </div>
+
+                        <button
+                            className="flex-1 rounded-lg bg-blue-600 px-4 py-3 font-medium text-white hover:bg-blue-700"
+                            onClick={() =>
+                                addItem(
+                                    product,
+                                    quantity,
+                                )
+                            }
+                        >
+                            Agregar al carrito
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
