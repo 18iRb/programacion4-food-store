@@ -22,13 +22,7 @@ function Navbar() {
                 {/* Logo */}
                 <Link
                     to="/"
-                    className="
-                        hidden
-                        text-2xl
-                        font-bold
-                        text-orange-600
-                        md:block
-                    "
+                    className="hidden text-2xl font-bold text-orange-600 md:block"
                 >
                     FoodStore
                 </Link>
@@ -38,26 +32,14 @@ function Navbar() {
 
                     <Link
                         to="/"
-                        className="
-                            text-sm
-                            font-medium
-                            text-slate-700
-                            transition-colors
-                            hover:text-orange-600
-                        "
+                        className="text-sm font-medium text-slate-700 transition-colors hover:text-orange-600"
                     >
                         Catálogo
                     </Link>
 
                     <Link
                         to="/carrito"
-                        className="
-                            text-sm
-                            font-medium
-                            text-slate-700
-                            transition-colors
-                            hover:text-orange-600
-                        "
+                        className="text-sm font-medium text-slate-700 transition-colors hover:text-orange-600"
                     >
                         Carrito
                     </Link>
@@ -65,13 +47,7 @@ function Navbar() {
                     {user && (
                         <Link
                             to="/mis-pedidos"
-                            className="
-                            text-sm
-                            font-medium
-                            text-slate-700
-                            transition-colors
-                            hover:text-orange-600
-                        "
+                            className="text-sm font-medium text-slate-700 transition-colors hover:text-orange-600"
                         >
                             Mis pedidos
                         </Link>
@@ -80,13 +56,7 @@ function Navbar() {
                     {user?.role === "admin" && (
                         <Link
                             to="/admin/resumen"
-                            className="
-                            text-sm
-                            font-medium
-                            text-slate-700
-                            transition-colors
-                            hover:text-orange-600
-                        "
+                            className="text-sm font-medium text-slate-700 transition-colors hover:text-orange-600"
                         >
                             Administración
                         </Link>
@@ -100,13 +70,7 @@ function Navbar() {
                         <>
                             <Link
                                 to="/login"
-                                className="
-                            text-sm
-                            font-medium
-                            text-slate-700
-                            transition-colors
-                            hover:text-orange-600
-                        "
+                                className="text-sm font-medium text-slate-700 transition-colors hover:text-orange-600"
                             >
                                 Iniciar sesión
                             </Link>

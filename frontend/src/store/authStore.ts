@@ -24,6 +24,8 @@ interface AuthStoreState {
     logout: () => Promise<void>;
 
     checkSession: () => Promise<void>;
+
+    clearAuth: () => void;
 }
 
 export const useAuthStore = create<AuthStoreState>()(
@@ -94,6 +96,12 @@ export const useAuthStore = create<AuthStoreState>()(
                     })
                 }
             },
+
+            clearAuth: () => {
+                set({
+                    user: null,
+                })
+            }
         }), {
         name: 'auth-storage',
         storage: createJSONStorage(() => sessionStorage),
