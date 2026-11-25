@@ -7,6 +7,22 @@ function CarritoPage() {
         (s) => s.items,
     );
 
+    const removeItem = useCartStore(
+        (s) => s.removeItem,
+    );
+
+    const increaseQuantity = useCartStore(
+        (s) => s.increaseQuantity,
+    );
+
+    const decreaseQuantity = useCartStore(
+        (s) => s.decreaseQuantity,
+    );
+
+    const clearCart = useCartStore(
+        (s) => s.clearCart,
+    );
+
     const total = useCartStore(
         (s) => s.getTotal(),
     );
@@ -43,6 +59,13 @@ function CarritoPage() {
                     Mi carrito
                 </h1>
 
+                <button
+                    onClick={clearCart}
+                    className="rounded-lg border border-red-300 px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50"
+                >
+                    Vaciar carrito
+                </button>
+
                 <p className="text-2xl font-bold text-orange-600">
                     Total: ${total.toLocaleString("es-AR")}
                 </p>
@@ -74,7 +97,7 @@ function CarritoPage() {
                             </th>
 
                             <th className="p-4">
-                                Acciones
+                                Eliminar
                             </th>
                         </tr>
                     </thead>
@@ -109,7 +132,33 @@ function CarritoPage() {
                                 </td>
 
                                 <td className="p-4">
-                                    {item.cantidad}
+                                    <div className="flex items-center gap-3">
+                                        <button
+                                            onClick={() =>
+                                                decreaseQuantity(
+                                                    item.producto_id,
+                                                )
+                                            }
+                                            className="flex h-8 w-8 items-center justify-center rounded border hover:bg-slate-100"
+                                        >
+                                            -
+                                        </button>
+
+                                        <span className="min-w-6 text-center">
+                                            {item.cantidad}
+                                        </span>
+
+                                        <button
+                                            onClick={() =>
+                                                increaseQuantity(
+                                                    item.producto_id,
+                                                )
+                                            }
+                                            className="flex h-8 w-8 items-center justify-center rounded border hover:bg-slate-100"
+                                        >
+                                            +
+                                        </button>
+                                    </div>
                                 </td>
 
                                 <td className="p-4 font-medium">
@@ -123,7 +172,16 @@ function CarritoPage() {
                                 </td>
 
                                 <td className="p-4">
-                                    Próximamente
+                                    <button
+                                        onClick={() =>
+                                            removeItem(
+                                                item.producto_id,
+                                            )
+                                        }
+                                        className="text-red-600 hover:text-red-800"
+                                    >
+                                        🗑
+                                    </button>
                                 </td>
                             </tr>
                         ))}

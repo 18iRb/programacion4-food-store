@@ -19,9 +19,12 @@ interface CartStoreState {
 
     removeItem: (productId: Product["id"]) => void;
 
-    updateQuantity: (
-        productId: Product["id"],
-        quantity: number,
+    increaseQuantity: (
+        productId: Product["id"]
+    ) => void;
+
+    decreaseQuantity: (
+        productId: Product["id"]
     ) => void;
 
     clearCart: () => void;
@@ -72,13 +75,59 @@ export const useCartStore =
                     }
                 },
 
-                removeItem: () => { },
+                removeItem: (productId: Product["id"]) => {
+                    const items = get().items;
 
-                updateQuantity: () => { },
+                    const itemsUpdate = items.filter((item) => item.producto_id != productId)
 
-                clearCart: () => { },
+                    set({
+                        items: itemsUpdate,
+                    })
+                },
 
-                getTotal: () => 0,
+                increaseQuantity: (productId: Product["id"]) => {
+                    const items = get().items;
+
+                    set({
+                        items: items.map((item) => item.producto_id === productId ? { ...item, cantidad: item.cantidad + 1 } : item)
+                    })
+                },
+
+                decreaseQuantity: (productId: Product["id"]) => {
+                    const items = get().items;
+                    const item = items.find((item) => item.producto_id === productId);
+
+                    if (!item || item.cantidad <= 0) {
+                        return;
+                    }
+
+                    if (item.cantidad === 1) {
+                        get().removeItem(item.producto_id);
+                        return;
+                    }
+
+                    set({
+                        items: items.map((current) =>
+                            current.producto_id === productId
+                                ? { ...current, cantidad: current.cantidad - 1 }
+                                : current
+                        ),
+                    });
+                },
+
+                clearCart: () => {
+                    set({
+                        items: [],
+                    });
+                },
+
+                getTotal: () => {
+                    const items = get().items;
+
+                    const total = items.reduce((acc, cur) => acc + cur.precio_unitario * cur.cantidad, 0)
+
+                    return total;
+                },
             }),
             {
                 name: "cart-storage",
