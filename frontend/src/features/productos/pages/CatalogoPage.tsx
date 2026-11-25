@@ -2,44 +2,42 @@ import { useMemo, useState } from "react";
 
 import ProductCard from "../components/ProductCard";
 import { useProducts } from "../hooks/useProducts";
+import { useCategories } from "@/features/categorias/hooks/useCategories";
 
 function CatalogoPage() {
     const {
-        data,
+        data: productsData,
         isLoading,
         error,
     } = useProducts();
 
+    const {
+        data: categoriesData,
+    } = useCategories();
+
     const [selectedCategory, setSelectedCategory] =
         useState("Todos");
 
-    const categories = useMemo(() => {
-        if (!data) return ["Todos"];
-
-        return [
-            "Todos",
-            ...new Set(
-                data.items.map(
-                    (product) =>
-                        product.categoria.nombre,
-                ),
-            ),
-        ];
-    }, [data]);
+    const categories = [
+        "Todos",
+        ...(categoriesData?.map(
+            (category) => category.nombre,
+        ) ?? []),
+    ];
 
     const filteredProducts = useMemo(() => {
-        if (!data) return [];
+        if (!productsData) return [];
 
         if (selectedCategory === "Todos") {
-            return data.items;
+            return productsData.items;
         }
 
-        return data.items.filter(
+        return productsData.items.filter(
             (product) =>
                 product.categoria.nombre ===
                 selectedCategory,
         );
-    }, [data, selectedCategory]);
+    }, [productsData, selectedCategory]);
 
     if (isLoading) {
         return <div>Cargando...</div>;

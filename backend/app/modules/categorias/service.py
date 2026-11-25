@@ -45,17 +45,14 @@ class CategoriaService:
     ) -> list[CategoriaRead]:
 
         with self.uow as uow:
-            categorias = uow.categorias.get_all_active(
-                offset=skip,
-                limit=limit,
-            )
+            categorias = uow.categorias.get_all_active()
 
-        return [
-            CategoriaRead.model_validate(
-                categoria,
-            )
-            for categoria in categorias
-        ]
+            return [
+                CategoriaRead.model_validate(
+                    categoria,
+                )
+                for categoria in categorias
+            ]
 
     def get_category_by_id(
         self,
