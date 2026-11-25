@@ -1,9 +1,14 @@
 import { useParams } from "react-router-dom";
 
 import { useProduct } from "../hooks/useProduct";
+import { useCartStore } from "@/store/cartStore";
 
 function ProductDetailPage() {
     const { id } = useParams();
+
+    const addItem = useCartStore(
+        (s) => s.addItem,
+    );
 
     const {
         data: product,
@@ -90,6 +95,7 @@ function ProductDetailPage() {
 
                     <button
                         className="mt-6 rounded-lg bg-blue-600 px-4 py-3 font-medium text-white hover:bg-blue-700"
+                        onClick={() => addItem(product)}
                     >
                         Agregar al carrito
                     </button>

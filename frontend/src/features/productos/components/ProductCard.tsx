@@ -2,6 +2,7 @@ import Button from "@/shared/ui/Button";
 
 import type { Product } from "../types/product";
 import { Link } from "react-router-dom";
+import { useCartStore } from "@/store/cartStore";
 
 interface ProductCardProps {
     product: Product;
@@ -10,6 +11,9 @@ interface ProductCardProps {
 function ProductCard({
     product,
 }: ProductCardProps) {
+
+    const addItem = useCartStore((s) => s.addItem);
+
     return (
         <article
             className="flex flex-col rounded-xl border bg-white p-4 shadow-sm transition-shadow hover:shadow-md"
@@ -72,6 +76,7 @@ function ProductCard({
 
                 <Button
                     className="w-full"
+                    onClick={() => addItem(product)}
                 >
                     Agregar al carrito
                 </Button>

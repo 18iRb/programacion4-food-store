@@ -1,6 +1,7 @@
 import { useAuthStore } from "@/store/authStore";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../ui/Button";
+import { useCartStore } from "@/store/cartStore";
 
 
 
@@ -13,6 +14,15 @@ function Navbar() {
 
     const logout = useAuthStore(
         (s) => s.logout,
+    );
+
+    const items = useCartStore(
+        (s) => s.items,
+    )
+
+    const totalItems = items.reduce(
+        (acc, item) => acc + item.cantidad,
+        0,
     );
 
     return (
@@ -41,7 +51,7 @@ function Navbar() {
                         to="/carrito"
                         className="text-sm font-medium text-slate-700 transition-colors hover:text-orange-600"
                     >
-                        Carrito
+                        Carrito ({totalItems})
                     </Link>
 
                     {user && (
