@@ -20,6 +20,7 @@ import { useCategoryColumns } from "../components/categoryColumns";
 import { useCategories } from "../hooks/useCategories";
 
 import type { Category } from "../types/category";
+import { AdminNavigation } from "@/features/admin/components/AdminNavigation";
 
 function AdminCategoriasPage() {
     const {
@@ -96,6 +97,8 @@ function AdminCategoriasPage() {
 
     return (
         <div className="mx-auto max-w-7xl p-6">
+            <AdminNavigation />
+
             <div className="mb-6 flex items-center justify-between">
                 <h1 className="text-3xl font-bold">
                     Categorías

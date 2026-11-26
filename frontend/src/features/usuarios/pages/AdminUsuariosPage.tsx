@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useUsers } from "../hooks/useUsers";
 import { flexRender, getCoreRowModel, getPaginationRowModel, getSortedRowModel, useReactTable, type PaginationState, type SortingState } from "@tanstack/react-table";
 import { useUserColumns } from "../components/userColumns";
+import { AdminNavigation } from "@/features/admin/components/AdminNavigation";
 
 function AdminUsuariosPage() {
 
@@ -55,6 +56,8 @@ function AdminUsuariosPage() {
 
     return (
         <div className="mx-auto max-w-7xl p-6">
+            <AdminNavigation />
+
             <h1 className="mb-6 text-3xl font-bold">
                 Usuarios
             </h1>
