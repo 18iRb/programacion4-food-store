@@ -1,6 +1,9 @@
 import { useForm } from "@tanstack/react-form";
 
 import type { Category } from "../types/category";
+import Input from "@/shared/ui/Input";
+import FormError from "@/shared/ui/FormField";
+import Button from "@/shared/ui/Button";
 
 type CategoryFormProps = {
     initialValues?: Partial<Category>;
@@ -50,7 +53,7 @@ export function CategoryForm({
                             Nombre
                         </label>
 
-                        <input
+                        <Input
                             type="text"
                             value={field.state.value}
                             onChange={(e) =>
@@ -59,7 +62,10 @@ export function CategoryForm({
                                 )
                             }
                             onBlur={field.handleBlur}
-                            className="w-full rounded-lg border p-2"
+                        />
+
+                        <FormError
+                            errors={field.state.meta.errors}
                         />
                     </div>
                 )}
@@ -89,18 +95,22 @@ export function CategoryForm({
                             }
                             onBlur={field.handleBlur}
                             rows={4}
-                            className="w-full rounded-lg border p-2"
+                            className="w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                        />
+
+                        <FormError
+                            errors={field.state.meta.errors}
                         />
                     </div>
                 )}
             </form.Field>
 
-            <button
+            <Button
                 type="submit"
-                className="w-full rounded-lg bg-orange-600 px-4 py-2 font-medium text-white hover:bg-orange-700"
+                className="w-full bg-orange-600 hover:bg-orange-700"
             >
                 Guardar
-            </button>
+            </Button>
         </form>
     );
 }
