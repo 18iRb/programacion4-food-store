@@ -14,7 +14,9 @@ class BaseRepository(Generic[ModelT]):
         return self.session.get(self.model, record_id)
 
     def get_all(self, offset: int = 0, limit: int = 20) -> list[ModelT]:
-        return self.session.exec(select(self.model)).offset(offset).limit(limit).all()
+        statement = select(self.model).offset(offset).limit(limit)
+
+        return self.session.exec(statement).all()
 
     def add(self, instance: ModelT) -> ModelT:
         self.session.add(instance)
