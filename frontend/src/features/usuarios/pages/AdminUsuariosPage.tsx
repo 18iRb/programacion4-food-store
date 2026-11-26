@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useUsers } from "../hooks/useUsers";
 import { flexRender, getCoreRowModel, getPaginationRowModel, getSortedRowModel, useReactTable, type PaginationState, type SortingState } from "@tanstack/react-table";
-import { userColumns } from "../components/userColumns";
+import { useUserColumns } from "../components/userColumns";
 
 function AdminUsuariosPage() {
 
@@ -20,9 +20,11 @@ function AdminUsuariosPage() {
             pageSize: 5,
         });
 
+    const columns = useUserColumns();
+
     const table = useReactTable({
         data: usersData ?? [],
-        columns: userColumns,
+        columns,
 
         state: {
             sorting,

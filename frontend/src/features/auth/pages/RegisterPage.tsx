@@ -7,7 +7,6 @@ import Input from "@/shared/ui/Input";
 import Button from "@/shared/ui/Button";
 import FormError from "@/shared/ui/FormField";
 import { toast } from "sonner";
-import axios from "axios";
 import { getErrorMessage } from "@/shared/utils/getErrorMessage";
 
 const defaultValues: RegisterData = {

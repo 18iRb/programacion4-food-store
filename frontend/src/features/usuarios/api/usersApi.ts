@@ -8,3 +8,23 @@ export async function getUsers() {
 
     return data;
 }
+
+export async function activateUser(
+    user_id: User["id"],
+) {
+    const { data } = await api.post<User>(
+        `/admin/usuarios/${user_id}/activar`,
+    )
+
+    return data;
+}
+
+export async function deactivateUser(
+    user_id: User["id"],
+) {
+    const { data } = await api.post<User>(
+        `/admin/usuarios/${user_id}/desactivar`,
+    )
+
+    return data;
+}
