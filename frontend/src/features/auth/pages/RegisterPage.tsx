@@ -6,6 +6,9 @@ import { useNavigate } from "react-router-dom";
 import Input from "@/shared/ui/Input";
 import Button from "@/shared/ui/Button";
 import FormError from "@/shared/ui/FormField";
+import { toast } from "sonner";
+import axios from "axios";
+import { getErrorMessage } from "@/shared/utils/getErrorMessage";
 
 const defaultValues: RegisterData = {
     username: "",
@@ -23,13 +26,22 @@ function RegisterPage() {
         defaultValues,
 
         onSubmit: async ({ value }) => {
-
             try {
                 setIsLoading(true);
 
                 await register(value);
 
+                toast.success(
+                    "Cuenta creada correctamente",
+                );
+
                 navigate("/login");
+
+            } catch (error) {
+                toast.error(
+                    getErrorMessage(error),
+                )
+
             } finally {
                 setIsLoading(false);
             }

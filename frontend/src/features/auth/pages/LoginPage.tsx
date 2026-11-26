@@ -7,6 +7,8 @@ import { useAuthStore } from "@/store/authStore";
 
 import type { LoginData } from "../types/login";
 import FormError from "@/shared/ui/FormField";
+import { toast } from "sonner";
+import { getErrorMessage } from "@/shared/utils/getErrorMessage";
 
 const defaultValues: LoginData = {
     email: "",
@@ -29,12 +31,21 @@ function LoginPage() {
         defaultValues,
 
         onSubmit: async ({ value }) => {
+            try {
+                await login(value);
 
-            await login(value);
+                toast.success(
+                    "Sesión iniciada correctamente",
+                );
 
-            navigate(
-                location.state?.from?.pathname ?? "/"
-            );
+                navigate(
+                    location.state?.from?.pathname ?? "/",
+                );
+            } catch (error) {
+                toast.error(
+                    getErrorMessage(error),
+                );
+            }
         }
     });
 
