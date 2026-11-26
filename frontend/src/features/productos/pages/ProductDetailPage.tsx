@@ -38,9 +38,10 @@ function ProductDetailPage() {
     }
 
     return (
-        <div className="mx-auto max-w-5xl p-6">
+        <div className="flex min-h-[calc(100vh-64px)] items-center justify-center p-6">
+
             <div
-                className="grid gap-8 rounded-xl bg-white p-6 shadow md:grid-cols-2"
+                className="grid w-full max-w-5xl gap-8 rounded-xl border bg-white p-8 shadow-sm md:grid-cols-2"
             >
                 <div
                     className="flex h-80 items-center justify-center rounded-lg bg-slate-100 text-8xl"
