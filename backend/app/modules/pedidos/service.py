@@ -261,6 +261,26 @@ class PedidoService:
                 ],
             )
 
+    def get_my_orders(
+        self,
+        current_user: User,
+    ) -> PedidosPaginados:
+
+        with self.uow as uow:
+            pedidos = uow.pedidos.list_by_usuario(
+                current_user.id,
+            )
+
+            return PedidosPaginados(
+                total=len(pedidos),
+                items=[
+                    PedidoRead.model_validate(
+                        pedido,
+                    )
+                    for pedido in pedidos
+                ],
+            )
+
     def get_summary(
         self,
     ) -> ResumenPedidos:

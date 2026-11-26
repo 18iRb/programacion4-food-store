@@ -78,6 +78,21 @@ def get_orders(
 
 
 @router.get(
+    "/mis-pedidos",
+    response_model=PedidosPaginados,
+    status_code=status.HTTP_200_OK,
+)
+def get_my_orders(
+    current_user: CurrentActiveUserDep,
+    service: PedidoServiceDep,
+) -> PedidosPaginados:
+    
+    return service.get_my_orders(
+        current_user=current_user,
+    )
+
+
+@router.get(
     path="/resumen",
     response_model=ResumenPedidos,
     status_code=status.HTTP_200_OK,
