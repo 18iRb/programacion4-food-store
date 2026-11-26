@@ -21,6 +21,7 @@ import AdminProductosPage from "@/features/productos/pages/AdminProductosPage";
 import MainLayout from "@/shared/layout/MainLayout";
 import GuestRoute from "./GuestRoute";
 import ProductDetailPage from "@/features/productos/pages/ProductDetailPage";
+import AdminPage from "@/features/admin/pages/AdminPage";
 
 
 function AppRouter() {
@@ -93,6 +94,11 @@ function AppRouter() {
                             />
                         }
                     >
+                        <Route
+                            path="/admin"
+                            element={<AdminPage />}
+                        />
+                        
                         <Route
                             path="/admin/resumen"
                             element={<AdminResumenPage />}

@@ -65,10 +65,10 @@ function Navbar() {
 
                     {user?.role === "admin" && (
                         <Link
-                            to="/admin/resumen"
+                            to="/admin"
                             className="text-sm font-medium text-slate-700 transition-colors hover:text-orange-600"
                         >
-                            Administración
+                            Panel
                         </Link>
                     )}
                 </div>
