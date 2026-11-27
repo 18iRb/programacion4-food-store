@@ -1,5 +1,5 @@
 import { api } from "@/shared/api/axiosInstance";
-import type { EstadoPedido, PaginatedPedidos, Pedido, PedidoCreate } from "../types/pedido";
+import type { EstadoPedido, PaginatedPedidos, Pedido, PedidoCreate, ResumenPedidos } from "../types/pedido";
 
 type UpdateOrderStatus = {
     pedido_id: Pedido["id"],
@@ -49,4 +49,12 @@ export async function changeOrderStatus({
     );
 
     return response.data;
+}
+
+export async function getSummary() {
+    const { data } = await api.get<ResumenPedidos>(
+        "/pedidos/resumen",
+    );
+
+    return data;
 }
