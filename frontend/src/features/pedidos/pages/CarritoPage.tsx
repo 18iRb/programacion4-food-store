@@ -1,8 +1,17 @@
 import { Link } from "react-router-dom";
 
 import { useCartStore } from "@/store/cartStore";
+import { useState } from "react";
+import { Modal } from "@/shared/ui/Modal";
+import { PedidoForm } from "../components/PedidoForm";
+import { useCreateOrder } from "../hooks/useCreateOrder";
 
 function CarritoPage() {
+    const [
+        isPedidoModalOpen,
+        setIsPedidoModalOpen,
+    ] = useState(false);
+
     const items = useCartStore(
         (s) => s.items,
     );
@@ -26,6 +35,9 @@ function CarritoPage() {
     const total = useCartStore(
         (s) => s.getTotal(),
     );
+
+    const createOrderMutation =
+        useCreateOrder();
 
     if (items.length === 0) {
         return (
@@ -64,6 +76,13 @@ function CarritoPage() {
                     className="rounded-lg border border-red-300 px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50"
                 >
                     Vaciar carrito
+                </button>
+
+                <button
+                    onClick={() => setIsPedidoModalOpen(true)}
+                    className="rounded-lg bg-green-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-green-700"
+                >
+                    Confirmar pedido
                 </button>
 
                 <p className="text-2xl font-bold text-orange-600">
@@ -187,6 +206,50 @@ function CarritoPage() {
                         ))}
                     </tbody>
                 </table>
+
+                <Modal
+                    isOpen={isPedidoModalOpen}
+                    onClose={() =>
+                        setIsPedidoModalOpen(false)
+                    }
+                    title="Confirmar pedido"
+                >
+                    <PedidoForm
+                        onSubmit={async (data) => {
+
+                            const payload = {
+                                items: items.map(
+                                    (item) => ({
+                                        producto_id:
+                                            item.producto_id,
+
+                                        cantidad:
+                                            item.cantidad,
+                                    }),
+                                ),
+
+                                forma_pago:
+                                    data.forma_pago,
+
+                                direccion_entrega:
+                                    data.direccion_entrega,
+
+                                notas:
+                                    data.notas,
+                            };
+
+                            await createOrderMutation.mutateAsync(
+                                payload,
+                            );
+
+                            clearCart();
+
+                            setIsPedidoModalOpen(
+                                false,
+                            );
+                        }}
+                    />
+                </Modal>
             </div>
         </div>
     );

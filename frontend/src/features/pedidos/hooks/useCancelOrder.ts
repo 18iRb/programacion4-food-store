@@ -10,7 +10,7 @@ export function useCancelOrder() {
 
         onSuccess: () => {
             queryClient.invalidateQueries({
-                queryKey: ["orders"],
+                queryKey: ["my-orders"],
             });
         },
     });

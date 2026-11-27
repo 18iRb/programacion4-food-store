@@ -1,5 +1,5 @@
 import { api } from "@/shared/api/axiosInstance";
-import type { PaginatedPedidos, Pedido } from "../types/pedido";
+import type { PaginatedPedidos, Pedido, PedidoCreate } from "../types/pedido";
 
 export async function getOrders() {
     const { data } = await api.get<PaginatedPedidos>("/pedidos/mis-pedidos");
@@ -15,4 +15,15 @@ export async function cancelOrder(
     );
 
     return data;
+}
+
+export async function createOrder(
+    data: PedidoCreate,
+) {
+    const response = await api.post(
+        "/pedidos",
+        data,
+    );
+
+    return response.data;
 }

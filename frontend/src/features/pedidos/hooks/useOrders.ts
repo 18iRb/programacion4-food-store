@@ -3,7 +3,7 @@ import { getOrders } from "../api/ordersApi";
 
 export function useOrders() {
     return useQuery({
-        queryKey: ["orders"],
+        queryKey: ["my-orders"],
         queryFn: getOrders,
     });
 }
