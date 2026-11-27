@@ -111,6 +111,8 @@ export function useOrderColumns({
         {
             id: "items",
 
+            enableSorting: false,
+
             header: "Productos",
 
             cell: ({ row }) => {
@@ -130,6 +132,8 @@ export function useOrderColumns({
 
         {
             id: "actions",
+
+            enableSorting: false,
 
             header: "Acciones",
 

@@ -3,7 +3,9 @@ import type { EstadoPedido, PaginatedPedidos, Pedido, PedidoCreate, ResumenPedid
 
 type UpdateOrderStatus = {
     pedido_id: Pedido["id"],
-    data: EstadoPedido
+    data: {
+        estado: EstadoPedido;
+    };
 }
 
 export async function getAllOrders() {

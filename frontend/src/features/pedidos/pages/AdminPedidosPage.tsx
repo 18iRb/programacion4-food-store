@@ -14,7 +14,6 @@ import { AdminNavigation } from "@/features/admin/components/AdminNavigation";
 
 import { useAllOrders } from "../hooks/useAllOrders";
 import { useChangeOrderStatus } from "../hooks/useChangeOrderStatus";
-import { useCancelOrder } from "../hooks/useCancelOrder";
 
 import { useOrderColumns } from "../components/orderColumns";
 
@@ -27,9 +26,6 @@ function AdminPedidosPage() {
 
     const changeStatusMutation =
         useChangeOrderStatus();
-
-    const cancelOrderMutation =
-        useCancelOrder();
 
     const [sorting, setSorting] =
         useState<SortingState>([]);
@@ -44,19 +40,28 @@ function AdminPedidosPage() {
         onPrepare: (pedidoId) =>
             changeStatusMutation.mutate({
                 pedido_id: pedidoId,
-                data: "EN_PREPARACION",
+                data: {
+                    estado:
+                        "EN_PREPARACION",
+                },
             }),
 
         onDeliver: (pedidoId) =>
             changeStatusMutation.mutate({
                 pedido_id: pedidoId,
-                data: "ENTREGADO",
+                data: {
+                    estado:
+                        "ENTREGADO",
+                },
             }),
 
         onCancel: (pedidoId) =>
-            cancelOrderMutation.mutate(
-                pedidoId,
-            ),
+            changeStatusMutation.mutate({
+                pedido_id: pedidoId,
+                data: {
+                    estado: "CANCELADO",
+                },
+            }),
     });
 
     const table = useReactTable({
@@ -145,12 +150,28 @@ function AdminPedidosPage() {
                                                 >
                                                     {header.isPlaceholder
                                                         ? null
-                                                        : flexRender(
-                                                            header
-                                                                .column
-                                                                .columnDef
-                                                                .header,
-                                                            header.getContext(),
+                                                        : (
+                                                            <button
+                                                                type="button"
+                                                                onClick={header.column.getToggleSortingHandler()}
+                                                                className="flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-slate-600 transition-colors hover:text-orange-600"
+                                                            >
+                                                                <span>
+                                                                    {flexRender(
+                                                                        header.column.columnDef.header,
+                                                                        header.getContext(),
+                                                                    )}
+                                                                </span>
+
+                                                                <span className="text-slate-400">
+                                                                    {{
+                                                                        asc: "▲",
+                                                                        desc: "▼",
+                                                                    }[
+                                                                        header.column.getIsSorted() as string
+                                                                    ] ?? ""}
+                                                                </span>
+                                                            </button>
                                                         )}
                                                 </th>
                                             ),

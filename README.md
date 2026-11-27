@@ -9,6 +9,20 @@ Aplicación web para gestión de pedidos de comida desarrollada con arquitectura
 
 ---
 
+# 🎥 Video de Demostración
+
+👉 [Ver video de demostración](https://1drv.ms/v/c/2b7689ccb114f181/IQBQtjJ2P2FtT4YdJiVgLPm6AcXkM_PJ9uJNTeNI0LiFJm0?e=flheM9)
+
+---
+
+# 🔗 Repositorio GitHub
+
+Repositorio público del proyecto:
+
+👉 https://github.com/18iRb/programacion4-food-store.git
+
+---
+
 ## 📋 Descripción
 
 Food Store es una aplicación que permite gestionar un sistema de pedidos de comida con roles de usuario y administrador.

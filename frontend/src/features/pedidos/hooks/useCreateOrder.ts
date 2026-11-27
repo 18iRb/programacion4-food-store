@@ -16,6 +16,10 @@ export function useCreateOrder() {
             );
 
             queryClient.invalidateQueries({
+                queryKey: ["orders"],
+            });
+
+            queryClient.invalidateQueries({
                 queryKey: ["my-orders"],
             });
         },
